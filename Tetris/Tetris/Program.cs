@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 char opcion = ' ';
-string[,] cubo = { { "[]" } ,{ "[]" },
-                   { "[]" },{ "[]" } };
+string[,] cubo = { { "▄▄","▄▄" } ,
+                   { "▄▄","▄▄"}};
 string[,] L = { { "[]" },{ "[]"} };
 string vacio = "[]";
 string[,] tablerov = { { "[]" ,"[]", "[]", "[]", "[]", "[]", "[]", "[]", "[]", "[]" },
@@ -32,7 +32,7 @@ while (opcion != 's')
     switch (opcion)
     {
         case 'i':
-            tablero();
+            tetris();
             break;
 
         default:
@@ -41,9 +41,45 @@ while (opcion != 's')
     }
 
 }
+void tetris()
+{
+    int i= 0;
+    char finciclo = ' ';
+    while (finciclo != 's')
+    {
+
+        tablero();
+        if (tablerov[18,0] == cubo[0,0] && tablerov[18,1] == cubo[0,1] && tablerov[19, 0] == cubo[1,0] && tablerov[19, 1] == cubo[1,1] )
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("FIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN");
+            finciclo = 's';
+        }
+        else
+        {
+            if(i!=0)
+            { 
+                tablerov[i - 1,0] = vacio;
+                tablerov[i - 1,1] = vacio;
+            }
+            tablerov[i, 0] = cubo[0, 0];
+            tablerov[i, 1] = cubo[0, 1];
+            tablerov[i+1, 0] = cubo[1, 0];
+            tablerov[i+1, 1] = cubo[1, 1];
+            i++;
+            
+        }
+      
+
+
+        
+
+
+    }
+}
 void tablero()
 {
-    Console.Clear();
+    //Console.Clear();
     char finciclo = ' ';
     int lineahecha=0;
     string pieza = "";
